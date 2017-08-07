@@ -26,7 +26,13 @@ while True:
     for tweet in tweepy.Cursor(api.search, q).items(5):
         try:
             tweet.retweet()
+        except:
+            pass
+        try:
             tweet.favorite()
+        except:
+            pass
+        try:
             tweet.user.follow()
             print('followed',tweet.user.screen_name)
         except:
