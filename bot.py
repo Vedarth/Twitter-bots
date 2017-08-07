@@ -33,5 +33,5 @@ while True:
             print('followed',tweet.user.screen_name)
         except:
             continue
-        sleep(10)
+        sleep(20)
 
