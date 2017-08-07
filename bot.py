@@ -6,10 +6,10 @@ import random
 try:
     from credentials import *
 except ModuleNotFoundError:
-    consumer_secret = os.dir['consumer_secret']
-    consumer_key = os.dir['consumer_key']
-    access_token = os.dir['access_token']
-    access_token_secret = os.dir['access_token_secret']
+    consumer_secret = os.environ['consumer_secret']
+    consumer_key = os.environ['consumer_key']
+    access_token = os.environ['access_token']
+    access_token_secret = os.environ['access_token_secret']
 #except Exception as e:
 #    print('Failed',e)
 
