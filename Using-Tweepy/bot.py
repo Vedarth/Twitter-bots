@@ -2,18 +2,16 @@ import tweepy
 from credentials import *
 from time import sleep
 import json
-import todo
+import random
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-
+with open('keywords.txt') as f:
+    keywords = f.readlines()
 while True:
     print ('What do you want to do?')
     j = 0
-    for i in todo.cando:
-        print(j,')',i)
-        j = j + 1
-    q = input()
+    q = random.choice(keywords).strip()    
     if q=='quit':
         break
     
