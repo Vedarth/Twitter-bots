@@ -25,7 +25,7 @@ while True:
     if q=='quit':
         break
     
-    for tweet in tweepy.Cursor(api.search, q).items(100):
+    for tweet in tweepy.Cursor(api.search, q).items(5):
         try:
             tweet.retweet()
             tweet.favorite()
@@ -33,6 +33,5 @@ while True:
             print('followed',tweet.user.screen_name)
         except:
             continue
-        sleep(20)
-        
+        sleep(10)
 
