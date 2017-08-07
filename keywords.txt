@@ -7,3 +7,8 @@ tensorflow
 google
 robots
 raspberrypi
+news
+politics
+inspiration
+motivation
+positivity
