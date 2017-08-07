@@ -22,7 +22,7 @@ while True:
     q = random.choice(keywords).strip()    
     if q=='quit':
         break
-    sleep(10)
+    sleep(20)
     for tweet in tweepy.Cursor(api.search, q).items(5):
         try:
             tweet.retweet()
@@ -38,5 +38,5 @@ while True:
             print('followed',tweet.user.screen_name)
         except:
             continue
-        sleep(5)
+        sleep(15)
 
