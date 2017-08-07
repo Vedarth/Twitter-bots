@@ -26,7 +26,8 @@ while True:
     for tweet in tweepy.Cursor(api.search, q).items(5):
         try:
             tweet.retweet()
-        except:
+        except Exception as e:
+            print('Could not retweet because',e)
             pass
         try:
             tweet.favorite()
