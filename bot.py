@@ -19,12 +19,10 @@ api = tweepy.API(auth)
 with open('keywords.txt') as f:
     keywords = f.readlines()
 while True:
-    print ('What do you want to do?')
-    j = 0
     q = random.choice(keywords).strip()    
     if q=='quit':
         break
-    
+    sleep(10)
     for tweet in tweepy.Cursor(api.search, q).items(5):
         try:
             tweet.retweet()
@@ -33,5 +31,5 @@ while True:
             print('followed',tweet.user.screen_name)
         except:
             continue
-        sleep(20)
+        sleep(5)
 
