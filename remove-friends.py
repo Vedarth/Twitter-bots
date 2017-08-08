@@ -18,9 +18,9 @@ following = list()
 for friend in tweepy.Cursor(api.friends).items(1000):
 	#following.append((friend.followers_count,friend.screen_name))
         try:
-            print(friend.unfollow())
-            sleep(20)
+            friend.unfollow()
             print('unfollowed',friend.screen_name)
+            sleep(20)
         except:
             sleep(15*60)
 
