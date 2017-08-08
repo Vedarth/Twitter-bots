@@ -1,9 +1,8 @@
 import os
 import tweepy
 from time import sleep
-import json
 import random
-class my_stream_listner(tweepy.StreamListener):
+class my_stream_listener(tweepy.StreamListener):
 
     def on_status(self, status):
         print(status.text)
@@ -45,5 +44,5 @@ while True:
         sleep(15)
         my_stream_listen = my_stream_listener()
         my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
-        my_stream.filter(track[q])
+        my_stream.filter(track=[q])
 
