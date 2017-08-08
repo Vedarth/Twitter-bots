@@ -14,15 +14,9 @@ except ModuleNotFoundError:
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-class my_stream_listener(tweepy.StreamListener):
-
-    def on_data(self,raw_data):
-        js = json.loads(raw_data)
-        print(js['id'])
-        api.retweet(str(js['id']))
-        api.create_favorite(str(js['id']))
-        api.create_friendship(js['user']['screen_name'])
-q = input()
-my_stream_listen = my_stream_listener()
-my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
-my_stream.filter(track=[q], async=True)
+following = list()
+for friend in tweepy.Cursor(api.friends).items(100):
+	#following.append((friend.followers_count,friend.screen_name))
+	friend.unfollow()
+#following.sort(reverse = True)
+#print (following)
