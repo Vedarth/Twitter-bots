@@ -3,6 +3,10 @@ import tweepy
 from time import sleep
 import json
 import random
+class my_stream_listner(tweepy.StreamListener):
+
+    def on_status(self, status):
+        print(status.text)
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -39,4 +43,7 @@ while True:
         except:
             continue
         sleep(15)
+        my_stream_listen = my_stream_listener()
+        my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
+        my_stream.filter(track[q])
 
