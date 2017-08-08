@@ -2,10 +2,7 @@ import os
 import tweepy
 from time import sleep
 import random
-class my_stream_listener(tweepy.StreamListener):
-
-    def on_status(self, status):
-        print(status.text)
+import json
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -17,7 +14,11 @@ except ModuleNotFoundError:
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+class my_stream_listener(tweepy.StreamListener):
 
+    def on_data(self,raw_data):
+        js = json.loads(raw_data)
+        print(json.dumps(js,indent=4))
 q = input()
 my_stream_listen = my_stream_listener()
 my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
