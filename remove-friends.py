@@ -15,8 +15,9 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 following = list()
-for friend in tweepy.Cursor(api.friends).items(100):
+#for friend in tweepy.Cursor(api.friends).items(100):
 	#following.append((friend.followers_count,friend.screen_name))
-	friend.unfollow()
+	print(friend.screen_name)
+	#print('unfollowed',friend.screen_name)
 #following.sort(reverse = True)
 #print (following)
