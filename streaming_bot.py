@@ -31,7 +31,7 @@ class my_stream_listener(tweepy.StreamListener):
         offend = False
         js = json.loads(raw_data)
         for word in js['text'].split():
-            if word in arrBad:
+            if word in bad.arrBad:
                 offend = True
         if offend is True:
             print('I am offended')
@@ -39,7 +39,6 @@ class my_stream_listener(tweepy.StreamListener):
             try:
                 api.retweet(str(js['id']))
                 self.counter += 1
-                print(js['text'])
                 sleep(5)
             except tweepy.TweepError as e:
                 print(e)
