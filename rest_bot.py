@@ -2,10 +2,6 @@ import os
 import tweepy
 from time import sleep
 import random
-class my_stream_listener(tweepy.StreamListener):
-
-    def on_status(self, status):
-        print(status.text)
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -26,7 +22,7 @@ while True:
     if q=='quit':
         break
     sleep(20)
-    for tweet in tweepy.Cursor(api.search, q).items(5):
+    for tweet in tweepy.Cursor(api.search, q).items(50):
         try:
             tweet.retweet()
         except Exception as e:
@@ -40,6 +36,4 @@ while True:
             tweet.user.follow()
             print('followed',tweet.user.screen_name)
         except:
-            continue
-        sleep(15)
-
+            pass
