@@ -1,6 +1,6 @@
 # The Perfect Twitter Bot #
 
-I am trying to create the _**perfect**_ twitter bot. Of course what I have is not perfect,yet, but I am making it better every day.
+I am trying to create the _**perfect**_ twitter bot. Ofcourse what I have is not perfect, yet, but I am making it better every day.
 
 
 Here is how you are supposed to use it:-
@@ -28,3 +28,5 @@ For example if your customer key is 123456789:-
 Fill the credentials.py file correctly and we are almost ready to roll.
 
 Now you can use the bot to your liking.
+
+P.S. Be sure to change my twitter handle to your in streaming_bot.py. Just edit the file and search for **vedarthsharma** and replace it by your twitter handle.
