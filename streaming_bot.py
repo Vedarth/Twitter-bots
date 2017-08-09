@@ -31,6 +31,7 @@ class my_stream_listener(tweepy.StreamListener):
         try:
             api.retweet(str(js['id']))
             self.counter += 1
+            print(str(js['text']))
             sleep(5)
         except tweepy.TweepError as e:
             print(e)
