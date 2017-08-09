@@ -26,7 +26,7 @@ class my_stream_listener(tweepy.StreamListener):
         self.limit = 20
 
     def on_data(self,raw_data):
-        sleep(35)
+        sleep(20)
         js = json.loads(raw_data)
         print(js['id'])
         try:
@@ -75,4 +75,4 @@ while True:
     q = random.choice(keywords)
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
-    my_stream.filter(track=[q], async=True)
+    my_stream.filter(languages=["en"], track=[q], async=True)
