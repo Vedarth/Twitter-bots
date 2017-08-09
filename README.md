@@ -1,4 +1,4 @@
-													#The Perfect Twitter Bot
+#The Perfect Twitter Bot
 
 I am trying to create the _**perfect**_ twitter bot. Of course what I have is not perfect,yet, but I am making it better every day.
 
@@ -15,7 +15,8 @@ Now you can run it! Right? Well actually there is one more step. You need to cre
 You are almost done.
 
 now create a file called credentials.py and here is what you are supposed to do, enter the below code into credentials.py:-
-```consumer_key=''
+```
+consumer_key=''
 consumer_secret=''
 access_token=''
 access_token_secret=''
