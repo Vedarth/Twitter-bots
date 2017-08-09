@@ -28,7 +28,6 @@ class my_stream_listener(tweepy.StreamListener):
     def on_data(self,raw_data):
         sleep(20)
         js = json.loads(raw_data)
-        print(js['id'])
         try:
             api.retweet(str(js['id']))
             self.counter += 1
