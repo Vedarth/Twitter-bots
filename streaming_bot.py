@@ -71,7 +71,6 @@ class my_stream_listener(tweepy.StreamListener):
 
 def unfollow():
     for friend in tweepy.Cursor(api.friends).items(200):
-	#following.append((friend.followers_count,friend.screen_name))
         try:
             friend.unfollow()
             print('unfollowed',friend.screen_name)
