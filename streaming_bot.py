@@ -4,6 +4,7 @@ from time import sleep
 import random
 import json
 import re
+import bad
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -26,40 +27,47 @@ class my_stream_listener(tweepy.StreamListener):
         self.limit = 20
 
     def on_data(self,raw_data):
-        sleep(20)
+        sleep(30)
+        offend = False
         js = json.loads(raw_data)
-        try:
-            api.retweet(str(js['id']))
-            self.counter += 1
-            print(str(js['text']))
-            sleep(5)
-        except tweepy.TweepError as e:
-            print(e)
-            sleep(5)
-        try:
-            api.create_favorite(str(js['id']))
-            self.counter += 1
-            sleep(5)
-        except tweepy.TweepError as e:
-            print(e)
-            sleep(5)
-        try:
-            api.create_friendship(js['user']['screen_name'])
-            print(js['user']['screen_name'])
-            self.counter += 1
-            sleep(5)
-        except tweepy.TweepError as e:
-            print(e)
-            sleep(5)
-        if user.friends_count > 4900:
-            unfollow()
+        for word in js['text'].split():
+            if word in arrBad:
+                offend = True
+        if offend is True:
+            print('I am offended')
         else:
-            pass
-        if self.counter < self.limit:
-            return True
-        else:
-            my_stream.disconnect()
-        sleep(10)
+            try:
+                api.retweet(str(js['id']))
+                self.counter += 1
+                print(js['text'])
+                sleep(5)
+            except tweepy.TweepError as e:
+                print(e)
+                sleep(5)
+            try:
+                api.create_favorite(str(js['id']))
+                self.counter += 1
+                sleep(5)
+            except tweepy.TweepError as e:
+                print(e)
+                sleep(5)
+            try:
+                api.create_friendship(js['user']['screen_name'])
+                print(js['user']['screen_name'])
+                self.counter += 1
+                sleep(5)
+            except tweepy.TweepError as e:
+                print(e)
+                sleep(5)
+            if user.friends_count > 4900:
+                unfollow()
+            else:
+                pass
+            if self.counter < self.limit:
+                return True
+            else:
+                my_stream.disconnect()
+        sleep(15)
 
 def unfollow():
     for friend in tweepy.Cursor(api.friends).items(200):
