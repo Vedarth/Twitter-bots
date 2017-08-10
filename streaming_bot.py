@@ -79,6 +79,7 @@ def unfollow():
 
 while True:
     q = random.choice(keywords)
+    print(q)
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
-    my_stream.filter(languages=["en"], track=[q], async=True)
+    my_stream.filter(languages=["en"], track=[q])
