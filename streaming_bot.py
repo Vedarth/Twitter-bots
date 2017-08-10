@@ -66,7 +66,7 @@ class my_stream_listener(tweepy.StreamListener):
                 return True
             else:
                 my_stream.disconnect()
-        sleep(15)
+        sleep(25)
 
 def unfollow():
     for friend in tweepy.Cursor(api.friends).items(200):
