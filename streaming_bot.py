@@ -30,6 +30,7 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(30)
         offend = False
         js = json.loads(raw_data)
+        print(js['text'],'\n',js['user']['screen_name'])
         for word in js['text'].split():
             if word in bad.arrBad:
                 offend = True
