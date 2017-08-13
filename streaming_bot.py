@@ -30,7 +30,6 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(30)
         offend = False
         js = json.loads(raw_data)
-        print(js['text'],'\n',js['user']['screen_name'])
         for word in js['text'].split():
             if word in bad.arrBad:
                 offend = True
@@ -70,7 +69,7 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(25)
 
 def unfollow():
-    for friend in tweepy.Cursor(api.friends).items(200):
+    for friend in tweepy.Cursor(api.friends).items(1000):
         try:
             friend.unfollow()
             print('unfollowed',friend.screen_name)
@@ -84,3 +83,4 @@ while True:
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
     my_stream.filter(languages=["en"], track=[q])
+        
