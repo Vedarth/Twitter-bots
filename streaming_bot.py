@@ -58,10 +58,6 @@ class my_stream_listener(tweepy.StreamListener):
             except tweepy.TweepError as e:
                 print(e)
                 sleep(5)
-            if user.friends_count > 4900:
-                unfollow()
-            else:
-                pass
             if self.counter < self.limit:
                 return True
             else:
@@ -80,6 +76,10 @@ def unfollow():
 while True:
     q = random.choice(keywords)
     print(q)
+    if user.friends_count > 4900:
+        unfollow()
+    else:
+        pass
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
     my_stream.filter(languages=["en"], track=[q])
