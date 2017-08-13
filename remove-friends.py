@@ -14,13 +14,14 @@ except ModuleNotFoundError:
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-for friend in tweepy.Cursor(api.friends).items(100):
+for friend in tweepy.Cursor(api.friends).items(1000):
 	#following.append((friend.followers_count,friend.screen_name))
         try:
             friend.unfollow()
             print('unfollowed',friend.screen_name)
-            sleep(50)
-        except:
+            sleep(75)
+        except tweepy.TweepError as e:
+            print(e)
             sleep(15*60)
 
 #following.sort(reverse = True)

@@ -1,1 +1,1 @@
-worker: python3 streaming_bot.py
+worker: python3 remove-friends.py
