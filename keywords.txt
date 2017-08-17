@@ -17,3 +17,6 @@ coding
 cryptography
 Iot
 hacking
+kivy
+django
+arduino
