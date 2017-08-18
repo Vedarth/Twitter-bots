@@ -29,7 +29,7 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(10)
         offend = False
         js = json.loads(raw_data)
-        if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted'=='True']:
+        if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted']=='True':
             offend=True
         for word in js['text'].split():
             if word in bad.arrBad:
