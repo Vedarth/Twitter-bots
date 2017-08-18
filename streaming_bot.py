@@ -23,12 +23,14 @@ class my_stream_listener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 20
+        self.limit = 21
 
     def on_data(self,raw_data):
-        sleep(40)
+        sleep(10)
         offend = False
         js = json.loads(raw_data)
+        if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted'=='True']:
+            offend=True
         for word in js['text'].split():
             if word in bad.arrBad:
                 offend = True
@@ -61,7 +63,7 @@ class my_stream_listener(tweepy.StreamListener):
                 return True
             else:
                 my_stream.disconnect()
-        sleep(25)
+        sleep(55)
 
 def unfollow():
     for friend in tweepy.Cursor(api.friends).items(1000):
@@ -77,7 +79,7 @@ while True:
     q = random.choice(keywords)
     print(q)
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 4700:
+    if user.friends_count > 4900:
         unfollow()
     else:
         pass
