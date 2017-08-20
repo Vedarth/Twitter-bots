@@ -66,7 +66,15 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(55)
 
 def unfollow():
-    for friend in tweepy.Cursor(api.friends).items(1000):
+    i = 0
+    for friend in tweepy.Cursor(api.friends).items(1100):
+        print (friend.screen_name,friend.following)
+        if friend.following:
+            print(friend.screen_name,'follows you!')
+            sleep(21)
+            continue
+        else:
+            pass
         try:
             friend.unfollow()
             print('unfollowed',friend.screen_name)
