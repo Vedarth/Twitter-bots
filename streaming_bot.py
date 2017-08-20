@@ -66,12 +66,11 @@ class my_stream_listener(tweepy.StreamListener):
         self.counter += 1
         sleep(55)
 
-def unfollow():
-    for friend in tweepy.Cursor(api.friends).items(1100):
-        print (friend.screen_name,friend.following)
-        if friend.following:
+def unfollow(followers_list):
+    for friend in tweepy.Cursor(api.friends).items(1000):
+        if friend.id in followers_list:
             print(friend.screen_name,'follows you!')
-            sleep(31)
+            sleep(40)
             continue
         else:
             pass
@@ -90,16 +89,18 @@ while True:
         print(q)
         action_decider=1
     else:
-        trends_list = api.trends_place(23424848)
+        #23424848
+        trends_list = api.trends_place(1)
         trends_dict = trends_list[0]
         trend_words = trends_dict['trends']
         trendwords = [trend_word['name'] for trend_word in trend_words]
         q = random.choice(trendwords)
         print(trendwords)
         action_decider=0
+        print(api.followers_ids('vedarthsharma'))
     user = api.get_user('vedarthsharma')
     if user.friends_count > 4900:
-        unfollow()
+        unfollow(api.followers_ids('vedarthsharma'))
     else:
         pass
     my_stream_listen = my_stream_listener()
