@@ -68,9 +68,9 @@ class my_stream_listener(tweepy.StreamListener):
 
 def unfollow(followers_list, friends_list):
     assholes = [friend for friend in friends_list if friend not in followers_list]
-    for friend in assholes:
+    for friend in assholes[-1000:]:
         try:
-            api.destroy_friendship
+            api.destroy_friendship(friend)
             print('unfollowed',friend)
             sleep(80)
         except tweepy.TweepError:
@@ -90,9 +90,8 @@ while True:
         trend_words = trends_dict['trends']
         trendwords = [trend_word['name'] for trend_word in trend_words]
         q = random.choice(trendwords)
-        print(trendwords)
+        print(q)
         action_decider=0
-        print(api.followers_ids('vedarthsharma'))
     user = api.get_user('vedarthsharma')
     if user.friends_count > 4900:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
@@ -101,4 +100,4 @@ while True:
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
     my_stream.filter(languages=["en"], track=[q])
-    sleep(60) 
+    sleep(60)
