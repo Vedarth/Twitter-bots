@@ -15,7 +15,7 @@ except ModuleNotFoundError:
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 fh = open('keywords.txt')
 keywords = fh.read().split()
 class my_stream_listener(tweepy.StreamListener):
@@ -66,17 +66,12 @@ class my_stream_listener(tweepy.StreamListener):
         self.counter += 1
         sleep(55)
 
-def unfollow(followers_list):
-    for friend in tweepy.Cursor(api.friends).items(1000):
-        if friend.id in followers_list:
-            print(friend.screen_name,'follows you!')
-            sleep(40)
-            continue
-        else:
-            pass
+def unfollow(followers_list, friends_list):
+    assholes = [friend for friend in friends_list if friend not in followers_list]
+    for friend in assholes:
         try:
-            friend.unfollow()
-            print('unfollowed',friend.screen_name)
+            api.destroy_friendship
+            print('unfollowed',friend)
             sleep(80)
         except tweepy.TweepError:
             print(e)
@@ -100,7 +95,7 @@ while True:
         print(api.followers_ids('vedarthsharma'))
     user = api.get_user('vedarthsharma')
     if user.friends_count > 4900:
-        unfollow(api.followers_ids('vedarthsharma'))
+        unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
     my_stream_listen = my_stream_listener()
