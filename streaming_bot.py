@@ -77,7 +77,7 @@ def unfollow(followers_list, friends_list):
             print(e)
             sleep(15*60)
 
-action_decider = 1
+action_decider = 0
 while True:
     if action_decider == 0:
         q = random.choice(keywords)
@@ -85,7 +85,7 @@ while True:
         action_decider=1
     else:
         #23424848
-        trends_list = api.trends_place(1)
+        trends_list = api.trends_place(23424848)
         trends_dict = trends_list[0]
         trend_words = trends_dict['trends']
         trendwords = [trend_word['name'] for trend_word in trend_words]
