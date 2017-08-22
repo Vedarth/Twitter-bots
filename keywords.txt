@@ -20,3 +20,8 @@ hacking
 kivy
 django
 arduino
+angularjs
+reactjs
+bootstrap
+tweepy
+scrapy
