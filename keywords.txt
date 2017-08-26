@@ -23,5 +23,4 @@ arduino
 angularjs
 reactjs
 bootstrap
-tweepy
 scrapy
