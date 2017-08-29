@@ -5,6 +5,7 @@ import random
 import json
 import re
 import bad
+import sqlite3
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -18,17 +19,22 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 fh = open('keywords.txt')
 keywords = fh.read().split()
+conn = sqlite3.connect('twitter_data.sqlite')
+cur = conn.cursor()
+cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT)')
+
 class my_stream_listener(tweepy.StreamListener):
 
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 60
+        self.limit = 27
 
     def on_data(self,raw_data):
         sleep(10)
         offend = False
         js = json.loads(raw_data)
+        print (json.dumps(js, indent=4))
         if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted']=='True':
             offend=True
         for word in js['text'].split():
@@ -72,7 +78,7 @@ def unfollow(followers_list, friends_list):
         try:
             api.destroy_friendship(friend)
             print('unfollowed',friend)
-            sleep(80)
+            sleep(50)
         except tweepy.TweepError:
             print(e)
             sleep(15*60)
@@ -99,5 +105,5 @@ while True:
         pass
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
-    my_stream.filter(languages=["en"], track=[q])
+    my_stream.filter(languages=["en"],track=[q])
     sleep(60)
