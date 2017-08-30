@@ -34,7 +34,6 @@ class my_stream_listener(tweepy.StreamListener):
         sleep(10)
         offend = False
         js = json.loads(raw_data)
-        print (json.dumps(js, indent=4))
         try:
             cur.execute('SELECT count FROM Twitter WHERE screen_name = ?',(js['user']['screen_name'],))
             count = int(cur.fetchone()[0])
