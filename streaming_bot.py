@@ -118,7 +118,7 @@ while True:
         print(q)
         action_decider=0
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 3900:
+    if user.friends_count > 4900:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
