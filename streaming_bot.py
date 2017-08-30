@@ -81,7 +81,7 @@ class my_stream_listener(tweepy.StreamListener):
 
 def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
-    for tweet in tweepy.Cursor(api.search, q).items(1000):
+    for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
             tweet.retweet()
         except Exception as e:
