@@ -21,7 +21,7 @@ fh = open('keywords.txt')
 keywords = fh.read().split()
 conn = sqlite3.connect('twitter_data.sqlite')
 cur = conn.cursor()
-cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT)')
+cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
 
 class my_stream_listener(tweepy.StreamListener):
 
@@ -35,6 +35,13 @@ class my_stream_listener(tweepy.StreamListener):
         offend = False
         js = json.loads(raw_data)
         print (json.dumps(js, indent=4))
+        try:
+            cur.execute('SELECT count FROM Twitter WHERE screen_name = ?',(js['user']['screen_name'],))
+            count = int(cur.fetchone()[0])
+            cur.execute('UPDATE Twitter SET count = ? WHERE screen_name = ?',(count+1,js['user']['screen_name']))
+        except:
+            cur.execute('INSERT INTO Twitter(name,screen_name,bio,count) VALUES (?,?,?,1)',(js['user']['name'],js['user']['screen_name'],js['user']['description']))
+        conn.commit()
         if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted']=='True':
             offend=True
         for word in js['text'].split():
@@ -85,13 +92,15 @@ def unfollow(followers_list, friends_list):
 
 action_decider = 0
 while True:
+    cur = conn.cursor()
+    cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
     if action_decider == 0:
         q = random.choice(keywords)
         print(q)
         action_decider=1
     else:
         #23424848
-        trends_list = api.trends_place(23424848)
+        trends_list = api.trends_place(1)
         trends_dict = trends_list[0]
         trend_words = trends_dict['trends']
         trendwords = [trend_word['name'] for trend_word in trend_words]
@@ -106,4 +115,5 @@ while True:
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
     my_stream.filter(languages=["en"],track=[q])
+    cur.close()
     sleep(60)
