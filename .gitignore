@@ -2,6 +2,3 @@ credentials.py
 
 tweetbot/
 
-*.sqlite
-twitter_data.sqlite
-twitter_data.sqlite-journal
