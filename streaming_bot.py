@@ -103,11 +103,12 @@ def unfollow(followers_list, friends_list):
 
 def curr_time():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-
+    #Heroku is about 6:30 hrs behind IST.
 
 
 action_decider = 0
 while True:
+    curr_time()
     cur = conn.cursor()
     cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
     if action_decider == 0:
