@@ -6,6 +6,7 @@ import json
 import re
 import bad
 import sqlite3
+from datetime import datetime
 try:
     from credentials import *
 except ModuleNotFoundError:
@@ -77,6 +78,7 @@ class my_stream_listener(tweepy.StreamListener):
                 my_stream.disconnect()
         self.counter += 1
         sleep(55)
+        curr_time()
 
 def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
@@ -97,7 +99,12 @@ def unfollow(followers_list, friends_list):
         except tweepy.TweepError:
             print(e)
             sleep(15*60)
-            
+        curr_time()
+
+def curr_time():
+    print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+
 
 action_decider = 0
 while True:
