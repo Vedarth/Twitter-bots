@@ -84,6 +84,17 @@ def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
     for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
+            api.destroy_friendship(assholes[i])
+            print('unfollowed',assholes[i])
+            sleep(50)
+        except tweepy.TweepError:
+            print(e)
+            sleep(15*60)
+        for word in tweet.text.split():
+            if word in bad.arrBad:
+                sleep(5)
+                continue
+        try:
             tweet.retweet()
         except Exception as e:
             print('Could not retweet because',e)
@@ -92,14 +103,7 @@ def unfollow(followers_list, friends_list):
             tweet.favorite()
         except:
             pass
-        try:
-            api.destroy_friendship(assholes[i])
-            print('unfollowed',assholes[i])
-            sleep(50)
-        except tweepy.TweepError:
-            print(e)
-            sleep(15*60)
-        curr_time()
+    curr_time()
 
 def curr_time():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
