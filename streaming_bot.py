@@ -93,6 +93,7 @@ def unfollow(followers_list, friends_list):
         for word in tweet.text.split():
             if word in bad.arrBad:
                 sleep(5)
+                print('I am rest offended')
                 continue
         try:
             tweet.retweet()
