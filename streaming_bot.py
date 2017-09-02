@@ -87,6 +87,7 @@ def unfollow(followers_list, friends_list):
             api.destroy_friendship(assholes[i])
             print('unfollowed',assholes[i])
             sleep(50)
+            i += 1
         except tweepy.TweepError:
             print(e)
             sleep(15*60)
