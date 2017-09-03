@@ -105,7 +105,7 @@ def unfollow(followers_list, friends_list):
             tweet.favorite()
         except:
             pass
-    curr_time()
+        curr_time()
 
 def curr_time():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))

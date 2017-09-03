@@ -12,10 +12,7 @@ coding
 cryptography
 Iot
 hacking
-kivy
 django
 arduino
 angularjs
 reactjs
-bootstrap
-scrapy
