@@ -82,7 +82,7 @@ class my_stream_listener(tweepy.StreamListener):
 
 def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
-    for tweet in tweepy.Cursor(api.search, 'Dhoni100').items(1000):
+    for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
             api.destroy_friendship(assholes[i])
             print('unfollowed',assholes[i])
@@ -98,6 +98,7 @@ def unfollow(followers_list, friends_list):
                 continue
         try:
             tweet.retweet()
+            print(tweet.text)
         except Exception as e:
             print('Could not retweet because',e)
             pass
@@ -131,7 +132,7 @@ while True:
         print(q)
         action_decider=0
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 4840:
+    if user.friends_count > 4900:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
