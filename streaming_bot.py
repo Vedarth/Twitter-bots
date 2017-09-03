@@ -123,7 +123,7 @@ while True:
         action_decider=1
     else:
         #23424848
-        trends_list = api.trends_place(23511745)
+        trends_list = api.trends_place(23424977)
         trends_dict = trends_list[0]
         trend_words = trends_dict['trends']
         trendwords = [trend_word['name'] for trend_word in trend_words]
