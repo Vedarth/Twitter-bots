@@ -29,7 +29,7 @@ class my_stream_listener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 27
+        self.limit = 18
 
     def on_data(self,raw_data):
         sleep(10)
@@ -113,6 +113,7 @@ def unfollow(followers_list, friends_list):
             try:
                 api.create_friendship(to_follow_list[to_follow - len(to_follow_list)])
                 to_follow_list.remove(to_follow_list[to_follow - len(to_follow_list)])
+                print('followed',to_follow_list[to_follow - len(to_follow_list)])
                 sleep(30)
             except:
                 pass
