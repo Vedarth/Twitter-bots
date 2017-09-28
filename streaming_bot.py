@@ -84,7 +84,7 @@ def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
     to_follow = int(len(followers_list)-(len(friends_list)-len(assholes)))
     to_follow_list = [follower for follower in followers_list if follower not in friends_list]
-    for tweet in tweepy.Cursor(api.search, 'python').items(1000 + to_follow):
+    for tweet in tweepy.Cursor(api.search, 'intern').items(1000 + to_follow):
         try:
             api.destroy_friendship(assholes[i])
             print('unfollowed',assholes[i])
@@ -106,6 +106,7 @@ def unfollow(followers_list, friends_list):
             pass
         try:
             tweet.favorite()
+            tweet.reply("Wanna learn more use code ISP8649VED to get 55%+10% discount on courses. Act quickly.http://corneey.com/q8lV3j")
         except:
             pass
         curr_time()
@@ -143,7 +144,7 @@ while True:
         print(q)
         action_decider=0
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 4900:
+    if user.friends_count > 4800:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
