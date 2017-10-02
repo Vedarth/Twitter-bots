@@ -90,7 +90,7 @@ def unfollow(followers_list, friends_list):
             print('unfollowed',assholes[i])
             sleep(50)
             i += 1
-        except tweepy.TweepError:
+        except tweepy.TweepError as e:
             print(e)
             sleep(15*60)
         for word in tweet.text.split():
@@ -106,7 +106,6 @@ def unfollow(followers_list, friends_list):
             pass
         try:
             tweet.favorite()
-            tweet.reply("Wanna learn more use code ISP8649VED to get 55%+10% discount on courses. Act quickly.http://corneey.com/q8lV3j")
         except:
             pass
         curr_time()
@@ -144,7 +143,7 @@ while True:
         print(q)
         action_decider=0
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 4800:
+    if user.friends_count > 4900:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
