@@ -84,11 +84,11 @@ def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
     to_follow = int(len(followers_list)-(len(friends_list)-len(assholes)))
     to_follow_list = [follower for follower in followers_list if follower not in friends_list]
-    for tweet in tweepy.Cursor(api.search, 'intern').items(1000 + to_follow):
+    for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
-            api.destroy_friendship(assholes[i])
+            api.destroy_friendship(assholes[i-1000])
             print('unfollowed',assholes[i])
-            sleep(50)
+            sleep(30)
             i += 1
         except tweepy.TweepError as e:
             print(e)
@@ -100,23 +100,15 @@ def unfollow(followers_list, friends_list):
                 continue
         try:
             tweet.retweet()
-            print(tweet.text)
+            sleep(20)
         except Exception as e:
             print('Could not retweet because',e)
             pass
         try:
             tweet.favorite()
         except:
-            pass
+            print('could not favorite')
         curr_time()
-        if len(to_follow_list)>0:
-            try:
-                api.create_friendship(to_follow_list[to_follow - len(to_follow_list)])
-                to_follow_list.remove(to_follow_list[to_follow - len(to_follow_list)])
-                print('followed',to_follow_list[to_follow - len(to_follow_list)])
-                sleep(30)
-            except:
-                pass
             
 
 def curr_time():
