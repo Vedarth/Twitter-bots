@@ -14,7 +14,7 @@ except ModuleNotFoundError:
     consumer_key = os.environ['consumer_key']
     access_token = os.environ['access_token']
     access_token_secret = os.environ['access_token_secret']
-    DATABASE_URL = os.environ['database_url']
+    DATABASE_URL = os.environ['DATABASE_URL']
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
