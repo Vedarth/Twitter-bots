@@ -28,6 +28,16 @@ password = url.password
 host = url.hostname
 port = url.port
 
+con = psycopg2.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+            )
+
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+
 conn = psycopg2.connect('twitter_data.sqlite')
 cur = conn.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
