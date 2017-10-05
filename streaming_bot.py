@@ -48,18 +48,18 @@ class my_stream_listener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 18
+        self.limit = 15
 
     def on_data(self,raw_data):
         sleep(10)
         offend = False
         js = json.loads(raw_data)
         try:
-            cur.execute('SELECT count FROM Twitter WHERE screen_name = ?',(js['user']['screen_name'],))
+            cur.execute('SELECT count FROM Twitter WHERE screen_name = %s',(js['user']['screen_name'],))
             count = int(cur.fetchone()[0])
-            cur.execute('UPDATE Twitter SET count = ? WHERE screen_name = ?',(count+1,js['user']['screen_name']))
+            cur.execute('UPDATE Twitter SET count = %s WHERE screen_name = %s',(count+1,js['user']['screen_name']))
         except:
-            cur.execute('INSERT INTO Twitter(name,screen_name,bio,count) VALUES (?,?,?,1)',(js['user']['name'],js['user']['screen_name'],js['user']['description']))
+            cur.execute('INSERT INTO Twitter(name,screen_name,bio,count) VALUES (%s,%s,%s,1)',(js['user']['name'],js['user']['screen_name'],js['user']['description']))
         conn.commit()
         if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted']=='True':
             offend=True
