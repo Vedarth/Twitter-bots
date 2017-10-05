@@ -20,7 +20,7 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 fh = open('keywords.txt')
 keywords = fh.read().split()
-conn = sqlite3.connect('twitter_data.sqlite')
+conn = psycopg2.connect('twitter_data.sqlite')
 cur = conn.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
 
