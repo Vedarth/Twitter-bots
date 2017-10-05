@@ -48,7 +48,7 @@ class my_stream_listener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 15
+        self.limit = 21
 
     def on_data(self,raw_data):
         sleep(10)
