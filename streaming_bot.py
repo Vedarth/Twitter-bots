@@ -5,7 +5,7 @@ import random
 import json
 import re
 import bad
-import sqlite3
+import psycopg2
 from datetime import datetime
 try:
     from credentials import *
