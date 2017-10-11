@@ -1,1 +1,1 @@
-worker: python3 streaming_bot.py
+worker: python3 rest_bot.py
