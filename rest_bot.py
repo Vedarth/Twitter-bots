@@ -26,7 +26,7 @@ class my_stream_listener(tweepy.StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 21
+        self.limit = 39
 
     def on_data(self,raw_data):
         sleep(10)
@@ -74,6 +74,7 @@ def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
     to_follow = int(len(followers_list)-(len(friends_list)-len(assholes)))
     to_follow_list = [follower for follower in followers_list if follower not in friends_list]
+    k=0
     for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
             api.destroy_friendship(assholes[i-1000])
@@ -98,6 +99,11 @@ def unfollow(followers_list, friends_list):
             tweet.favorite()
         except:
             print('could not favorite')
+        try:
+            api.create_friendship(tofollow[k++])
+            sleep(10)
+        except:
+            pass
         curr_time()
             
 
@@ -122,12 +128,11 @@ while True:
         print(q)
         action_decider=0
     user = api.get_user('vedarthsharma')
-    if user.friends_count > 4800:
+    if user.friends_count > 4900:
         unfollow(api.followers_ids('vedarthsharma'), api.friends_ids('vedarthsharma'))
     else:
         pass
     my_stream_listen = my_stream_listener()
     my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listen)
     my_stream.filter(languages=["en"],track=[q])
-    cur.close()
     sleep(60)
