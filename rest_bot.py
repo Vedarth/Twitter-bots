@@ -74,7 +74,6 @@ def unfollow(followers_list, friends_list):
     assholes, i = [friend for friend in friends_list if friend not in followers_list], 0
     to_follow = int(len(followers_list)-(len(friends_list)-len(assholes)))
     to_follow_list = [follower for follower in followers_list if follower not in friends_list]
-    k=0
     for tweet in tweepy.Cursor(api.search, 'python').items(1000):
         try:
             api.destroy_friendship(assholes[i-1000])
@@ -99,11 +98,6 @@ def unfollow(followers_list, friends_list):
             tweet.favorite()
         except:
             print('could not favorite')
-        try:
-            api.create_friendship(tofollow[k++])
-            sleep(10)
-        except:
-            pass
         curr_time()
             
 
@@ -111,6 +105,10 @@ def curr_time():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     #Heroku is about 6:30 hrs behind IST.
 
+def follow_followers(followers_list, friends_list):
+    to_follow_list = [follower for follower in followers_list if follower not in friends_list]
+    for i in range(len(to_follow_list)):
+        api.create_friendship(to_follow_list[i])
 
 action_decider = 0
 while True:
