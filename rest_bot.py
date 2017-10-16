@@ -99,7 +99,7 @@ def unfollow(followers_list, friends_list):
         except:
             print('could not favorite')
         curr_time()
-            
+    follow_followers(followers_list, friends_list)
 
 def curr_time():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))

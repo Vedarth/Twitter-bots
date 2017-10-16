@@ -23,6 +23,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 fh = open('keywords.txt')
 keywords = fh.read().split()
 
+
 url = urlparse(os.environ[str(DATABASE_URL)])
 dbname = url.path[1:]
 user = url.username
@@ -40,7 +41,7 @@ con = psycopg2.connect(
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
-conn = psycopg2.connect('twitter_data.sqlite')
+conn = psycopg2.connect('database.sql')
 cur = conn.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS Twitter(name TEXT, screen_name TEXT, bio TEXT, count INTEGER)')
 
