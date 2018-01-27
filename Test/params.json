@@ -1,0 +1,13 @@
+{
+  "config": {
+    "consumer_key": "K9Q4I21vZHwLODeFlB4PHlogc",
+    "consumer_secret": "djzGkFk9LVrwJGs8p25kxbkzovcZdsy7GDkfBQ8szM2foytFEk",
+    "access_token_key": "881110102291259392-VQk4mOzd6XxJL3IOoHtbKKy6E8KcKnd",
+    "access_token_secret": "vvpuRjJ8P6hxwnWlUvB0nOUSIkSOsgi1pu7xLkoFlM3Y8"
+  },
+  "tweets": [
+    "Hello Everyone! Have a nice day :)",
+    "Merry Christmas",
+    "Merry Xmas!"
+    ]
+}

@@ -5,6 +5,8 @@ import random
 import json
 import re
 import bad
+from bs4 import BeautifulSoup as bs
+import urllib.request,urllib.parse,urllib.error
 from urllib.parse import urlparse
 from datetime import datetime
 try:
@@ -29,7 +31,7 @@ class my_stream_listener(tweepy.StreamListener):
         self.limit = 39
 
     def on_data(self,raw_data):
-        sleep(10)
+        sleep(30)
         offend = False
         js = json.loads(raw_data)
         if str(js['user']['screen_name']) == 'vedarthsharma' or js['retweeted']=='True':
